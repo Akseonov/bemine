@@ -1,0 +1,16 @@
+{
+  "source": [
+    "./src/assets/scss/tokens/global.json"
+  ],
+  "platforms": {
+    "scss": {
+      "transforms": ["name/cti/camel"],
+      "transformGroup": "scss",
+      "buildPath": "./src/assets/scss/",
+      "files": [{
+        "destination": "tokens.scss",
+        "format": "scss/map-deep"
+      }]
+    }
+  }
+}

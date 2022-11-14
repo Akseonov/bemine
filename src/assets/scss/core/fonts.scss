@@ -1,0 +1,29 @@
+@font-face {
+	font-family: $fontFamily;
+	font-weight: 400;
+	font-style: normal;
+	src:
+		//url("@/assets/fonts/#{str-remove-whitespace($fontFamily)}-Regular.woff") format("woff"),
+		//url("@/assets/fonts/#{str-remove-whitespace($fontFamily)}-Regular.woff2") format("woff2"),
+		url("@/assets/fonts/#{str-remove-whitespace($fontFamily)}-Regular.ttf") format("woff2");
+}
+
+@font-face {
+	font-family: $fontFamily;
+	font-weight: 600;
+	font-style: normal;
+	src:
+		//url("@/assets/fonts/#{str-remove-whitespace($fontFamily)}-SemiBold.woff") format("woff"),
+		//url("@/assets/fonts/#{str-remove-whitespace($fontFamily)}-SemiBold.woff2") format("woff2"),
+		url("@/assets/fonts/#{str-remove-whitespace($fontFamily)}-SemiBold.ttf") format("woff2");
+}
+
+@font-face {
+	font-family: $fontFamily;
+	font-weight: 700;
+	font-style: normal;
+	src:
+		//url("@/assets/fonts/#{str-remove-whitespace($fontFamily)}-Bold.woff") format("woff"),
+		//url("@/assets/fonts/#{str-remove-whitespace($fontFamily)}-Bold.woff2") format("woff2"),
+		url("@/assets/fonts/#{str-remove-whitespace($fontFamily)}-Bold.ttf") format("woff2");
+}

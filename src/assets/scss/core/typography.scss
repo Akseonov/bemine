@@ -1,0 +1,110 @@
+.text {
+	&H1 {
+		font-weight: 700;
+		font-size: 34px;
+		line-height: 36px;
+	}
+
+	&H2 {
+		font-weight: 700;
+		font-size: 24px;
+		line-height: 32px;
+		letter-spacing: 0.18px;
+	}
+
+	&H3 {
+		font-weight: 600;
+		font-size: 18px;
+		line-height: 24px;
+		letter-spacing: 0.15px;
+	}
+
+	&Subtitle1 {
+		font-weight: 600;
+		font-size: 16px;
+		line-height: 24px;
+		letter-spacing: 0.15px;
+	}
+
+	&Subtitle2 {
+		font-weight: 600;
+		font-size: 14px;
+		line-height: 24px;
+		letter-spacing: 0.1px;
+	}
+
+	&Body1 {
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 24px;
+		letter-spacing: 0.5px;
+	}
+
+	&Body2 {
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 20px;
+		letter-spacing: 0.25px;
+	}
+
+	&Button {
+		font-weight: 600;
+		font-size: 14px;
+		line-height: 16px;
+		letter-spacing: 1px;
+	}
+
+	&Overline {
+		font-weight: 600;
+		font-size: 10px;
+		line-height: 16px;
+		letter-spacing: 1.5px;
+		text-transform: uppercase;
+	}
+
+	&Caption {
+		font-weight: 600;
+		font-size: 12px;
+		line-height: 20px;
+		letter-spacing: 0.4px;
+	}
+
+	&Caption2 {
+		font-weight: 400;
+		font-size: 12px;
+		line-height: 16px;
+		letter-spacing: 0.4px;
+	}
+
+	&Link {
+		font-weight: 400;
+		font-size: 12px;
+		line-height: 16px;
+		letter-spacing: 0.4px;
+		text-decoration-line: underline;
+	}
+
+	&ButtonLink {
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 16px;
+		letter-spacing: 1px;
+		text-decoration-line: underline;
+	}
+
+	&Subtitle2Caps {
+		font-weight: 600;
+		font-size: 14px;
+		line-height: 16px;
+		letter-spacing: 1.5px;
+		text-transform: uppercase;
+	}
+
+	&Body1Link {
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 24px;
+		letter-spacing: 0.5px;
+		text-decoration-line: underline;
+	}
+}

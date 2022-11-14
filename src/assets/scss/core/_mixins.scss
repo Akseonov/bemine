@@ -1,0 +1,140 @@
+@use "sass:math";
+
+@mixin breakpoint($name) {
+	@media (min-width: map-deep-get($tokens, grid, breakpoint, $name)) {
+		@content;
+	}
+}
+
+@mixin breakpointDown($name) {
+	@media (max-width: map-deep-get($tokens, grid, breakpoint, $name) - 0.02) {
+		@content;
+	}
+}
+
+@mixin breakpointBetween($name) {
+	@media (min-width: map-deep-get($tokens, grid, breakpoint, $name)) and (max-width: map-deep-get($tokens, grid, breakpoint, $name)) {
+		@content;
+	}
+}
+
+@mixin mediaRetina {
+	@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+		@content;
+	}
+}
+
+@mixin mediaHover {
+	@media (hover: hover) {
+		@content;
+	}
+}
+
+@mixin animation($duration: .4s, $timing: cubic-bezier(.455, .03, .515, .955)) {
+	animation-duration: $duration;
+	animation-timing-function: $timing;
+	animation-fill-mode: both;
+}
+
+@mixin transition($property: all, $duration: .2s, $timing: ease-in-out) {
+	//transition-property: $property;
+	//transition-duration: $duration;
+	//transition-timing-function: $timing;
+	//transition-delay: 0s;
+	transition: $property $duration $timing 0s;
+}
+
+@mixin aspectRatio($width, $height) {
+	&:before {
+		display: block;
+		content: "";
+		width: 100%;
+		padding-top: ($height / $width) * 100%;
+	}
+
+	> * {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+}
+
+@mixin inlineBlock($vertical-align: top) {
+	display: inline-block;
+	vertical-align: $vertical-align;
+}
+
+@mixin pseudo($display: block, $pos: absolute, $content: "") {
+	content: $content;
+	display: $display;
+	position: $pos;
+}
+
+@mixin resizable($direction) {
+	overflow: auto;
+	resize: $direction;
+}
+
+@mixin size($width, $height: $width) {
+	width: $width;
+	height: $height;
+}
+
+@mixin truncateLine($boundary: 100%) {
+	max-width: $boundary;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+@mixin truncateMultiline($lines) {
+	display: -webkit-box;
+	overflow: hidden;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: $lines;
+}
+
+@mixin invisible($visibility) {
+	visibility: $visibility !important;
+}
+
+@mixin baseline($fontSize, $scale: 2) {
+	$rhythm: $fontLineHeight * $fontSize / $scale;
+	$lines: math.ceil(($fontSize + .001px) / $rhythm);
+	$lineHeight: $rhythm * $lines / $fontSize;
+
+	font-size: $fontSize;
+	line-height: $lineHeight;
+
+	$baselineDistance: ($lineHeight - $fontCapHeight) / 2;
+
+	padding-top: $baselineDistance + em;
+	margin-bottom: $fontLineHeight - $baselineDistance + em;
+}
+
+@mixin center($position) {
+	position: absolute;
+
+	@if $position == 'vertical' {
+		top: 50%;
+		transform: translateY(-50%);
+	} @else if $position == 'horizontal' {
+		left: 50%;
+		transform: translate(-50%);
+	} @else if $position == 'both' {
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+}
+
+@mixin grid() {
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat($gridColumns, minmax(0, 1fr));
+	grid-template-rows: auto;
+	column-gap: $gridGapWidth;
+	row-gap: $gridGapHeight;
+}

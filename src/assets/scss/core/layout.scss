@@ -1,0 +1,387 @@
+@use "sass:math";
+
+/* Wrappers */
+.l-container {
+	width: 100%;
+	padding-left: $containerGutterWidth;
+	padding-right: $containerGutterWidth;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: $containerMaxWidth;
+
+	&.-slim {
+		max-width: 1280px;
+	}
+
+	&.-noGutterMobile {
+		@include breakpointDown(S) {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+
+	&.-noGutters {
+		max-width: unset;
+	}
+}
+
+.l-alignFooter {
+	min-height: 100%;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	grid-template-columns: 100%;
+
+	@include breakpoint(S) {
+		overflow: hidden;
+	}
+}
+
+/* Flex Layout */
+.l-flex {
+	display: flex;
+	flex: 0 1 auto;
+	//flex-direction: row;
+	//flex-wrap: wrap;
+	flex-flow: row wrap;
+	margin-left: calc($gridGapWidth / -2);
+	margin-right: calc($gridGapWidth / -2);
+
+	&.-noWrap {
+		flex-wrap: inherit;
+	}
+
+	&.-vertical {
+		flex-direction: column;
+	}
+
+	&.-top {
+		align-items: flex-start;
+	}
+
+	&.-middle {
+		align-items: center;
+	}
+
+	&.-bottom {
+		align-items: flex-end;
+	}
+
+	&.-left {
+		justify-content: flex-start;
+	}
+
+	&.-center {
+		justify-content: center;
+	}
+
+	&.-right {
+		justify-content: flex-end;
+	}
+
+	&.-around {
+		justify-content: space-around;
+	}
+
+	&.-between {
+		justify-content: space-between;
+	}
+
+	&.-reverse {
+		flex-direction: row-reverse;
+	}
+
+	&.-noGap {
+		margin-left: 0;
+		margin-right: 0;
+
+		> [class*="l-column"] {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+
+	.l-column {
+		flex: 0 0 auto;
+		padding-left: calc($gridGapWidth / 2);
+		padding-right: calc($gridGapWidth / 2);
+		flex-grow: 1;
+		max-width: 100%;
+		min-height: 1px;
+
+		@for $i from 1 through $gridColumns {
+			&.-width#{$i} {
+				flex-basis: math.percentage(calc($i / $gridColumns));
+				max-width: math.percentage(calc($i / $gridColumns));
+			}
+		}
+
+		@each $name, $value in map-deep-get($tokens, grid, breakpoint) {
+			@include breakpoint($name) {
+				@for $i from 1 through $gridColumns {
+					&.-width#{$i}#{$name} {
+						flex-basis: math.percentage(calc($i / $gridColumns));
+						max-width: math.percentage(calc($i / $gridColumns));
+					}
+				}
+			}
+		}
+
+		@for $i from 0 through ($gridColumns - 1) {
+			@if not ($i == 0) {
+				&.-offset#{$i} {
+					$num: calc($i / $gridColumns);
+					margin-left: if($num == 0, 0, math.percentage($num));
+				}
+			}
+		}
+
+		@each $name, $value in map-deep-get($tokens, grid, breakpoint) {
+			@include breakpoint($name) {
+				@for $i from 0 through ($gridColumns - 1) {
+					@if not ($i == 0) {
+						&.-offset#{$i}#{$name} {
+							$num: calc($i / $gridColumns);
+							margin-left: if($num == 0, 0, math.percentage($num));
+						}
+					}
+				}
+			}
+		}
+
+		&.-top {
+			align-self: flex-start;
+		}
+
+		&.-middle {
+			align-self: center;
+		}
+
+		&.-bottom {
+			align-self: flex-end;
+		}
+
+		&.-left {
+			margin-right: auto;
+		}
+
+		&.-center {
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		&.-right {
+			margin-left: auto;
+		}
+
+		&.-first {
+			order: -1;
+		}
+
+		&.-last {
+			order: 1;
+		}
+
+		&.-noGutters {
+			padding: 0;
+		}
+
+		@each $name, $value in map-deep-get($tokens, grid, breakpoint) {
+			@include breakpointDown($name) {
+				&.-first#{$name} {
+					order: -1;
+				}
+
+				&.-last#{$name} {
+					order: 1;
+				}
+			}
+		}
+	}
+}
+
+/* Grid Layout */
+.l-grid {
+	@include grid;
+
+	@for $i from 1 through $gridColumns {
+		&.-size#{$i} {
+			grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
+		}
+	}
+
+	@each $name, $value in map-deep-get($tokens, grid, breakpoint) {
+		@include breakpoint($name) {
+			@for $i from 1 through $gridColumns {
+				&.-size#{$i}#{$name} {
+					grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
+				}
+			}
+		}
+	}
+
+	&.-noWrap {
+		grid-auto-flow: column;
+	}
+
+	&.-alignAuto {
+		align-items: auto;
+	}
+
+	&.-alignStart {
+		align-items: start;
+	}
+
+	&.-alignCenter {
+		align-items: center;
+	}
+
+	&.-alignEnd {
+		align-items: end;
+	}
+
+	&.-alignStretch {
+		align-items: stretch;
+	}
+
+	&.-justifyAuto {
+		justify-items: auto;
+	}
+
+	&.-justifyStart {
+		justify-items: start;
+	}
+
+	&.-justifyCenter {
+		justify-items: center;
+	}
+
+	&.-justifyEnd {
+		justify-items: end;
+	}
+
+	&.-rowGapX2 {
+		row-gap: $gridGapHeight * 2;
+	}
+
+	&.-cellGapX2 {
+		column-gap: $gridGapWidth * 2;
+	}
+
+	&.-rowGapX05 {
+		row-gap: calc($gridGapHeight / 2);
+	}
+
+	&.-noGap {
+		gap: unset;
+	}
+
+	.l-column {
+		@for $i from 1 through $gridColumns {
+			&.-row#{$i} {
+				grid-row-start: #{$i};
+			}
+
+			&.-column#{$i} {
+				grid-column-start: #{$i};
+			}
+
+			&.-height#{$i} {
+				grid-row-end: span #{$i};
+			}
+
+			&.-width#{$i} {
+				grid-column-end: span #{$i};
+			}
+		}
+
+		&.-alignAuto {
+			align-self: auto;
+		}
+
+		&.-alignStart {
+			align-self: start;
+		}
+
+		&.-alignCenter {
+			align-self: center;
+		}
+
+		&.-alignEnd {
+			align-self: end;
+		}
+
+		&.-justifyAuto {
+			justify-self: auto;
+		}
+
+		&.-justifyStart {
+			justify-self: start;
+		}
+
+		&.-justifyCenter {
+			justify-self: center;
+		}
+
+		&.-justifyEnd {
+			justify-self: end;
+		}
+
+		@each $name, $value in map-deep-get($tokens, grid, breakpoint) {
+			@include breakpoint($name) {
+				@for $i from 1 through $gridColumns {
+					&.-row#{$i}#{$name} {
+						grid-row-start: #{$i};
+					}
+
+					&.-column#{$i}#{$name} {
+						grid-column-start: #{$i};
+					}
+
+					&.-height#{$i}#{$name} {
+						grid-row-end: span #{$i};
+					}
+
+					&.-width#{$i}#{$name} {
+						grid-column-end: span #{$i};
+					}
+
+					&.-alignAuto#{$name} {
+						align-self: auto;
+					}
+
+					&.-alignStart#{$name} {
+						align-self: start;
+					}
+
+					&.-alignCenter#{$name} {
+						align-self: center;
+					}
+
+					&.-alignEnd#{$name} {
+						align-self: end;
+					}
+
+					&.-alignStretch#{$name} {
+						align-self: stretch;
+					}
+
+					&.-justifyAuto#{$name} {
+						justify-self: auto;
+					}
+
+					&.-justifyStart#{$name} {
+						justify-self: start;
+					}
+
+					&.-justifyCenter#{$name} {
+						justify-self: center;
+					}
+
+					&.-justifyEnd#{$name} {
+						justify-self: end;
+					}
+				}
+			}
+		}
+	}
+}
