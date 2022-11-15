@@ -247,8 +247,8 @@
 		display: inline-flex !important;
 	}
 
-	[type="checkbox"]:not(last-child) + label,
-	[type="radio"]:not(last-child) + label {
+	[type="checkbox"]:not(:last-child) + label,
+	[type="radio"]:not(:last-child) + label {
 		margin-right: 20px !important;
 	}
 
