@@ -168,7 +168,7 @@ module.exports = {
 		// 	hidePathInfo: true,
 		// 	cacheGroups: {
 		// 		vendors: {
-		// 			test: /node_modules/,
+		// 			documents: /node_modules/,
 		// 			chunks: 'all',
 		// 			name: 'vendors',
 		// 			enforce: true,

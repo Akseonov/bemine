@@ -5,7 +5,7 @@ import {
 } from 'vue-router';
 import { defineAsyncComponent } from "vue";
 
-const MainView = defineAsyncComponent( () => import( '@/views/MainView.vue' ) );
+const MainView = defineAsyncComponent(() => import('@/views/MainView.vue'));
 
 const routes: Array<RouteRecordRaw> = [
 	{
@@ -23,9 +23,9 @@ const routes: Array<RouteRecordRaw> = [
 	// }
 ];
 
-const router = createRouter( {
+const router = createRouter({
 	history: createWebHistory(), // без сервера в production не будет выводить компоненты
 	routes,
-} );
+});
 
 export default router;
