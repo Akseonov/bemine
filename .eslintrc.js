@@ -11,7 +11,6 @@ module.exports = {
 		"plugin:vue/essential",
 		"standard",
 		"plugin:vue/base"
-
 	],
 	parserOptions: {
 		parser: "@typescript-eslint/parser",
@@ -32,7 +31,7 @@ module.exports = {
 		semi: [ 'error', 'always' ],
 		'comma-dangle': [ 'error', 'always-multiline' ],
 		'space-before-function-paren': [ 'error', 'never' ],
-		'space-in-parens': [ 'error', 'always' ],
+		'space-in-parens': [ 'error', 'never' ],
 		'no-multi-spaces': [
 			'error',
 			{
@@ -61,7 +60,7 @@ module.exports = {
 				skipBlankLines: true,
 			},
 		],
-		'arrow-parens': [ 'error', 'as-needed' ],
+		'arrow-parens': [ 'error', 'always' ],
 		'template-curly-spacing': [ 'error', 'always' ],
 		'array-bracket-spacing': [ 'error', 'always' ],
 		'object-curly-spacing': [ 'error', 'always' ],
@@ -69,7 +68,11 @@ module.exports = {
 		'no-new': 'off',
 		'@typescript-eslint/semi': ['error'],
 		'@typescript-eslint/indent': ['error', 'tab'],
-		'@typescript-eslint/explicit-function-return-type': 0
+		'@typescript-eslint/explicit-function-return-type': 0,
+		'vue/no-multiple-template-root': 0,
+		"no-unused-vars": "off",
+		"@typescript-eslint/no-unused-vars": ["error"],
+		"computed-property-spacing": ["error", "always"]
 	},
 	overrides: [
 		{
