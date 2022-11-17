@@ -2,7 +2,6 @@ import { State } from './state';
 import { Mutations } from "./mutations";
 import { ActionContext, ActionTree } from "vuex";
 import { RootState } from "@/store";
-import { _CounterMutationTypes, _CounterActionTypes } from "./types";
 
 type ArgumentActionContent = {
 	commit<K extends keyof Mutations>(
@@ -12,21 +11,18 @@ type ArgumentActionContent = {
 } & Omit<ActionContext<State, RootState>, 'commit'>;
 
 export interface Actions {
-	[ _CounterActionTypes.FETCH_COUNTER ](
+	fetchCounter(
 		{ commit }: ArgumentActionContent,
 		someId: string,
 	): Promise<boolean>;
 }
 
 export const actions: ActionTree<State, RootState> & Actions = {
-	async [ _CounterActionTypes.FETCH_COUNTER ]({ commit }, someId: string) {
+	async fetchCounter({ commit }, someId: string) {
 		return new Promise(() => {
 			setTimeout(() => {
 				console.debug('FETCH_Counter', someId);
-				// const data = {
-				// 	documents: [ {}, {} ],
-				// };
-				commit(_CounterMutationTypes.INCREMENT, undefined);
+				commit('increment', undefined);
 				return true;
 			}, 500);
 		});

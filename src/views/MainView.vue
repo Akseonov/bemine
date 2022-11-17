@@ -1,6 +1,6 @@
 <template>
-	<h2>{{ GET_COUNT }}</h2>
-	<button @click.prevent="INCREMENT">increment</button>
+	<h2>{{ getCount }}</h2>
+	<button @click.prevent="increment">increment</button>
 	<br>
 	<button @click.prevent="fetchCounter">fetch increment</button>
 	<hello-world/>
@@ -14,7 +14,6 @@ import {
 } from 'vuex';
 
 import { useStore } from '@/store';
-import { CounterActionTypes } from '@/store/modules/counter/types';
 
 const HelloWorld = defineAsyncComponent(() => import('@/components/HelloWorld.vue'));
 
@@ -28,7 +27,7 @@ export default defineComponent({
 
 		async function fetchCounter() {
 			try {
-				await store.dispatch(CounterActionTypes.FETCH_COUNTER, '1');
+				await store.dispatch("counter/fetchCounter", '1');
 			} catch (error) {
 				console.error('fetchDocuments', error);
 			}
@@ -39,10 +38,10 @@ export default defineComponent({
 		};
 	},
 	computed: {
-		...mapGetters('counter', [ 'GET_COUNT' ]),
+		...mapGetters('counter', [ 'getCount' ]),
 	},
 	methods: {
-		...mapMutations('counter', [ 'INCREMENT' ]),
+		...mapMutations('counter', [ 'increment' ]),
 	},
 });
 </script>
