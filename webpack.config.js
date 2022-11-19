@@ -7,6 +7,9 @@ const StylelintPlugin = require( 'stylelint-webpack-plugin' );
 const { CleanWebpackPlugin } = require( 'clean-webpack-plugin' );
 const PurgecssPlugin = require('purgecss-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
+const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 
 const { NODE_ENV, HOST, PORT } = process.env;
 
@@ -127,6 +130,8 @@ module.exports = {
 		],
 	},
 	plugins: [
+		new DuplicatePackageCheckerPlugin(),
+		new ProgressBarPlugin(),
 		new VueLoaderPlugin(),
 		new HtmlWebpackPlugin({
 			title: 'Mining Hotel',
@@ -149,7 +154,32 @@ module.exports = {
 		}),
 		new MiniCssExtractPlugin({
 			filename: '[name].css',
-		})
+		}),
+		new SVGSpritemapPlugin('./src/assets/svg/**/*.svg',{
+			output: {
+				filename: 'img/icons.svg',
+			},
+			sprite: {
+				prefix: false,
+				generate: {
+					title: false,
+				},
+			},
+		}),
+		// new SVGSpritemapPlugin([
+		// 	path.resolve(__dirname, 'src/assets/svg/*.svg'),
+		// ], {
+		// 	output: {
+		// 		filename: 'img/icons.svg',
+		// 	},
+		// 	sprite: {
+		// 		prefix: false,
+		// 		generate: {
+		// 			title: false,
+		// 		},
+		// 	},
+		// 	styles: false,
+		// }),
 	],
 	resolve: {
 		extensions: [

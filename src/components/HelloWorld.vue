@@ -1,5 +1,8 @@
 <template>
   <div class="u-marginBottomX3">Hello</div>
+	<svg>
+		<use xlink:href="img/icons.svg#arrow-down"></use>
+	</svg>
 </template>
 
 <script>
